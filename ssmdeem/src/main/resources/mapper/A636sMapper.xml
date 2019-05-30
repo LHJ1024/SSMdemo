@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ssmdeem.dao.A636sMapper" >
+  <resultMap id="BaseResultMap" type="org.ssmdeem.entity.A636s" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="placename" property="placename" jdbcType="VARCHAR" />
+    <result column="user_type" property="userType" jdbcType="VARCHAR" />
+    <result column="number_type" property="numberType" jdbcType="VARCHAR" />
+    <result column="city_village" property="cityVillage" jdbcType="VARCHAR" />
+    <result column="internetbundle" property="internetbundle" jdbcType="VARCHAR" />
+    <result column="sfee" property="sfee" jdbcType="VARCHAR" />
+    <result column="serial_number" property="serialNumber" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, placename, user_type, number_type, city_village, internetbundle, sfee, serial_number, 
+    time
+  </sql>
+  <insert id="insertInfoBatch">
+    insert into a636s( placename, user_type, number_type, city_village, internetbundle, sfee)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (
+      #{item.placename}, #{item.userType},#{item.numberType},#{item.cityVillage} , #{item.internetbundle},#{item.sfee}
+      )
+    </foreach>
+  </insert>
+  <update id="update">
+    update a636s
+    set
+    placename = #{placename,jdbcType=VARCHAR}
+    where
+    id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="find" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from a636s
+    where city_village=#{cityVillage}
+    and  internetbundle=#{internetbundle}
+    and  user_type=#{userType}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from a636s
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="findAll" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from a636s ORDER BY placename DESC
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from a636s
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="org.ssmdeem.entity.A636s" >
+    insert into a636s (id, placename, user_type, 
+      number_type, city_village, internetbundle, 
+      sfee, serial_number, time
+      )
+    values (#{id,jdbcType=INTEGER}, #{placename,jdbcType=VARCHAR}, #{userType,jdbcType=VARCHAR}, 
+      #{numberType,jdbcType=VARCHAR}, #{cityVillage,jdbcType=VARCHAR}, #{internetbundle,jdbcType=VARCHAR}, 
+      #{sfee,jdbcType=VARCHAR}, #{serialNumber,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.ssmdeem.entity.A636s" >
+    insert into a636s
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="placename != null" >
+        placename,
+      </if>
+      <if test="userType != null" >
+        user_type,
+      </if>
+      <if test="numberType != null" >
+        number_type,
+      </if>
+      <if test="cityVillage != null" >
+        city_village,
+      </if>
+      <if test="internetbundle != null" >
+        internetbundle,
+      </if>
+      <if test="sfee != null" >
+        sfee,
+      </if>
+      <if test="serialNumber != null" >
+        serial_number,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="placename != null" >
+        #{placename,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="numberType != null" >
+        #{numberType,jdbcType=VARCHAR},
+      </if>
+      <if test="cityVillage != null" >
+        #{cityVillage,jdbcType=VARCHAR},
+      </if>
+      <if test="internetbundle != null" >
+        #{internetbundle,jdbcType=VARCHAR},
+      </if>
+      <if test="sfee != null" >
+        #{sfee,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNumber != null" >
+        #{serialNumber,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ssmdeem.entity.A636s" >
+    update a636s
+    <set >
+      <if test="placename != null" >
+        placename = #{placename,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        user_type = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="numberType != null" >
+        number_type = #{numberType,jdbcType=VARCHAR},
+      </if>
+      <if test="cityVillage != null" >
+        city_village = #{cityVillage,jdbcType=VARCHAR},
+      </if>
+      <if test="internetbundle != null" >
+        internetbundle = #{internetbundle,jdbcType=VARCHAR},
+      </if>
+      <if test="sfee != null" >
+        sfee = #{sfee,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNumber != null" >
+        serial_number = #{serialNumber,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ssmdeem.entity.A636s" >
+    update a636s
+    set placename = #{placename,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=VARCHAR},
+      number_type = #{numberType,jdbcType=VARCHAR},
+      city_village = #{cityVillage,jdbcType=VARCHAR},
+      internetbundle = #{internetbundle,jdbcType=VARCHAR},
+      sfee = #{sfee,jdbcType=VARCHAR},
+      serial_number = #{serialNumber,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

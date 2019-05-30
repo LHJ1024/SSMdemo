@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ssmdeem.dao.TelephonecontractMapper" >
+  <resultMap id="BaseResultMap" type="org.ssmdeem.entity.Telephonecontract" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="serial_number" property="serialNumber" jdbcType="INTEGER" />
+    <result column="contract_number" property="contractNumber" jdbcType="INTEGER" />
+    <result column="access_number" property="accessNumber" jdbcType="VARCHAR" />
+    <result column="distribution_ratio" property="distributionRatio" jdbcType="INTEGER" />
+    <result column="sp" property="sp" jdbcType="VARCHAR" />
+    <result column="dateClass" property="dateclass" jdbcType="VARCHAR" />
+    <result column="moneySubject" property="moneysubject" jdbcType="VARCHAR" />
+    <result column="collection_type" property="collectionType" jdbcType="VARCHAR" />
+    <result column="divided_instructions" property="dividedInstructions" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, serial_number, contract_number, access_number, distribution_ratio, sp, dateClass, 
+    moneySubject, collection_type, divided_instructions, start_time, end_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from telephonecontract
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+   <select id="find1" resultType="org.ssmdeem.entity.Telephonecontract">
+    select *from telephonecontract ORDER BY contract_number limit #{start},#{end}
+  </select>
+  <select id="count2" resultType="java.lang.Integer">
+    select count(*) from telephonecontract
+  </select>
+   <select id="repeat" resultMap="BaseResultMap">
+    select *  from telephonecontract
+    where contract_number= #{contractNumber,jdbcType=INTEGER}
+  </select>
+  <select id="findAll" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from telephonecontract
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from telephonecontract
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ssmdeem.entity.Telephonecontract" >
+    insert into telephonecontract (id, serial_number, contract_number, 
+      access_number, distribution_ratio, sp, 
+      dateClass, moneySubject, collection_type, 
+      divided_instructions, start_time, end_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{serialNumber,jdbcType=INTEGER}, #{contractNumber,jdbcType=INTEGER}, 
+      #{accessNumber,jdbcType=VARCHAR}, #{distributionRatio,jdbcType=INTEGER}, #{sp,jdbcType=VARCHAR}, 
+      #{dateclass,jdbcType=VARCHAR}, #{moneysubject,jdbcType=VARCHAR}, #{collectionType,jdbcType=VARCHAR}, 
+      #{dividedInstructions,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.ssmdeem.entity.Telephonecontract" >
+    insert into telephonecontract
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="serialNumber != null" >
+        serial_number,
+      </if>
+      <if test="contractNumber != null" >
+        contract_number,
+      </if>
+      <if test="accessNumber != null" >
+        access_number,
+      </if>
+      <if test="distributionRatio != null" >
+        distribution_ratio,
+      </if>
+      <if test="sp != null" >
+        sp,
+      </if>
+      <if test="dateclass != null" >
+        dateClass,
+      </if>
+      <if test="moneysubject != null" >
+        moneySubject,
+      </if>
+      <if test="collectionType != null" >
+        collection_type,
+      </if>
+      <if test="dividedInstructions != null" >
+        divided_instructions,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="serialNumber != null" >
+        #{serialNumber,jdbcType=INTEGER},
+      </if>
+      <if test="contractNumber != null" >
+        #{contractNumber,jdbcType=INTEGER},
+      </if>
+      <if test="accessNumber != null" >
+        #{accessNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="distributionRatio != null" >
+        #{distributionRatio,jdbcType=INTEGER},
+      </if>
+      <if test="sp != null" >
+        #{sp,jdbcType=VARCHAR},
+      </if>
+      <if test="dateclass != null" >
+        #{dateclass,jdbcType=VARCHAR},
+      </if>
+      <if test="moneysubject != null" >
+        #{moneysubject,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionType != null" >
+        #{collectionType,jdbcType=VARCHAR},
+      </if>
+      <if test="dividedInstructions != null" >
+        #{dividedInstructions,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ssmdeem.entity.Telephonecontract" >
+    update telephonecontract
+    <set >
+      <if test="serialNumber != null" >
+        serial_number = #{serialNumber,jdbcType=INTEGER},
+      </if>
+      <if test="contractNumber != null" >
+        contract_number = #{contractNumber,jdbcType=INTEGER},
+      </if>
+      <if test="accessNumber != null" >
+        access_number = #{accessNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="distributionRatio != null" >
+        distribution_ratio = #{distributionRatio,jdbcType=INTEGER},
+      </if>
+      <if test="sp != null" >
+        sp = #{sp,jdbcType=VARCHAR},
+      </if>
+      <if test="dateclass != null" >
+        dateClass = #{dateclass,jdbcType=VARCHAR},
+      </if>
+      <if test="moneysubject != null" >
+        moneySubject = #{moneysubject,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionType != null" >
+        collection_type = #{collectionType,jdbcType=VARCHAR},
+      </if>
+      <if test="dividedInstructions != null" >
+        divided_instructions = #{dividedInstructions,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ssmdeem.entity.Telephonecontract" >
+    update telephonecontract
+    set serial_number = #{serialNumber,jdbcType=INTEGER},
+      contract_number = #{contractNumber,jdbcType=INTEGER},
+      access_number = #{accessNumber,jdbcType=VARCHAR},
+      distribution_ratio = #{distributionRatio,jdbcType=INTEGER},
+      sp = #{sp,jdbcType=VARCHAR},
+      dateClass = #{dateclass,jdbcType=VARCHAR},
+      moneySubject = #{moneysubject,jdbcType=VARCHAR},
+      collection_type = #{collectionType,jdbcType=VARCHAR},
+      divided_instructions = #{dividedInstructions,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

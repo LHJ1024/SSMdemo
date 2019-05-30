@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ssmdeem.dao.A627Mapper" >
+  <resultMap id="BaseResultMap" type="org.ssmdeem.entity.A627" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="placename" property="placename" jdbcType="VARCHAR" />
+    <result column="bigclass" property="bigclass" jdbcType="VARCHAR" />
+    <result column="smallclass" property="smallclass" jdbcType="VARCHAR" />
+    <result column="number_name" property="numberName" jdbcType="VARCHAR" />
+    <result column="product" property="product" jdbcType="VARCHAR" />
+    <result column="city_village" property="cityVillage" jdbcType="VARCHAR" />
+    <result column="internetbundle" property="internetbundle" jdbcType="VARCHAR" />
+    <result column="usernumber" property="usernumber" jdbcType="VARCHAR" />
+    <result column="yfee" property="yfee" jdbcType="VARCHAR" />
+    <result column="serial_number" property="serialNumber" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, placename, bigclass, smallclass, number_name, product, city_village, internetbundle, 
+    usernumber, yfee, serial_number, time
+  </sql>
+  <insert id="insertInfoBatch">
+    insert into a627(  placename, bigclass, smallclass, number_name, product, city_village, internetbundle,
+    usernumber, yfee)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (
+      #{item.placename}, #{item.bigclass}, #{item.smallclass}, #{item.numberName}, #{item.product},#{item.cityVillage},#{item.internetbundle},
+      #{item.usernumber},#{item.yfee}
+      )
+    </foreach>
+  </insert>
+  <select id="find1" resultType="org.ssmdeem.entity.A627">
+    select *from a627 limit #{start},#{end}
+  </select>
+  <select id="count2" resultType="java.lang.Integer">
+    select count(*) from a627
+  </select>
+  <select id="find2" resultMap="BaseResultMap">
+    SELECT
+    *
+    from a627
+    <where>
+      <if test="placename != null and placename != ''">
+        placename=#{placename}
+      </if>
+      <if test="bigclass != null and bigclass !=''">
+        and  bigclass=#{bigclass}
+      </if>
+      <if test="smallclass != null and smallclass !=''">
+        and  smallclass=#{smallclass}
+      </if>
+      <if test="numberName != null and numberName !=''">
+        and  number_name=#{numberName}
+      </if>
+    </where>
+  </select>
+  <update id="update">
+    update a627
+    set
+    placename = #{placename,jdbcType=VARCHAR}
+    where
+    id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from a627
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="findAll" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from a627 ORDER BY placename DESC
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from a627
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ssmdeem.entity.A627" >
+    insert into a627 (id, placename, bigclass, 
+      smallclass, number_name, product, 
+      city_village, internetbundle, usernumber, 
+      yfee, serial_number, time
+      )
+    values (#{id,jdbcType=INTEGER}, #{placename,jdbcType=VARCHAR}, #{bigclass,jdbcType=VARCHAR}, 
+      #{smallclass,jdbcType=VARCHAR}, #{numberName,jdbcType=VARCHAR}, #{product,jdbcType=VARCHAR}, 
+      #{cityVillage,jdbcType=VARCHAR}, #{internetbundle,jdbcType=VARCHAR}, #{usernumber,jdbcType=VARCHAR}, 
+      #{yfee,jdbcType=VARCHAR}, #{serialNumber,jdbcType=INTEGER}, #{time,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.ssmdeem.entity.A627" >
+    insert into a627
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="placename != null" >
+        placename,
+      </if>
+      <if test="bigclass != null" >
+        bigclass,
+      </if>
+      <if test="smallclass != null" >
+        smallclass,
+      </if>
+      <if test="numberName != null" >
+        number_name,
+      </if>
+      <if test="product != null" >
+        product,
+      </if>
+      <if test="cityVillage != null" >
+        city_village,
+      </if>
+      <if test="internetbundle != null" >
+        internetbundle,
+      </if>
+      <if test="usernumber != null" >
+        usernumber,
+      </if>
+      <if test="yfee != null" >
+        yfee,
+      </if>
+      <if test="serialNumber != null" >
+        serial_number,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="placename != null" >
+        #{placename,jdbcType=VARCHAR},
+      </if>
+      <if test="bigclass != null" >
+        #{bigclass,jdbcType=VARCHAR},
+      </if>
+      <if test="smallclass != null" >
+        #{smallclass,jdbcType=VARCHAR},
+      </if>
+      <if test="numberName != null" >
+        #{numberName,jdbcType=VARCHAR},
+      </if>
+      <if test="product != null" >
+        #{product,jdbcType=VARCHAR},
+      </if>
+      <if test="cityVillage != null" >
+        #{cityVillage,jdbcType=VARCHAR},
+      </if>
+      <if test="internetbundle != null" >
+        #{internetbundle,jdbcType=VARCHAR},
+      </if>
+      <if test="usernumber != null" >
+        #{usernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="yfee != null" >
+        #{yfee,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNumber != null" >
+        #{serialNumber,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ssmdeem.entity.A627" >
+    update a627
+    <set >
+      <if test="placename != null" >
+        placename = #{placename,jdbcType=VARCHAR},
+      </if>
+      <if test="bigclass != null" >
+        bigclass = #{bigclass,jdbcType=VARCHAR},
+      </if>
+      <if test="smallclass != null" >
+        smallclass = #{smallclass,jdbcType=VARCHAR},
+      </if>
+      <if test="numberName != null" >
+        number_name = #{numberName,jdbcType=VARCHAR},
+      </if>
+      <if test="product != null" >
+        product = #{product,jdbcType=VARCHAR},
+      </if>
+      <if test="cityVillage != null" >
+        city_village = #{cityVillage,jdbcType=VARCHAR},
+      </if>
+      <if test="internetbundle != null" >
+        internetbundle = #{internetbundle,jdbcType=VARCHAR},
+      </if>
+      <if test="usernumber != null" >
+        usernumber = #{usernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="yfee != null" >
+        yfee = #{yfee,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNumber != null" >
+        serial_number = #{serialNumber,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ssmdeem.entity.A627" >
+    update a627
+    set placename = #{placename,jdbcType=VARCHAR},
+      bigclass = #{bigclass,jdbcType=VARCHAR},
+      smallclass = #{smallclass,jdbcType=VARCHAR},
+      number_name = #{numberName,jdbcType=VARCHAR},
+      product = #{product,jdbcType=VARCHAR},
+      city_village = #{cityVillage,jdbcType=VARCHAR},
+      internetbundle = #{internetbundle,jdbcType=VARCHAR},
+      usernumber = #{usernumber,jdbcType=VARCHAR},
+      yfee = #{yfee,jdbcType=VARCHAR},
+      serial_number = #{serialNumber,jdbcType=INTEGER},
+      time = #{time,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

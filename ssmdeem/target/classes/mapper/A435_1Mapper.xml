@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ssmdeem.dao.A435_1Mapper" >
+  <resultMap id="BaseResultMap" type="org.ssmdeem.entity.A435_1" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="placename" property="placename" jdbcType="VARCHAR" />
+    <result column="commodity" property="commodity" jdbcType="VARCHAR" />
+    <result column="voicestation" property="voicestation" jdbcType="VARCHAR" />
+    <result column="befor_fee" property="beforFee" jdbcType="DOUBLE" />
+    <result column="fee" property="fee" jdbcType="DOUBLE" />
+    <result column="after_fee" property="afterFee" jdbcType="DOUBLE" />
+    <result column="serial_number" property="serialNumber" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, placename, commodity, voicestation, befor_fee, fee, after_fee, serial_number, 
+    time
+  </sql>
+
+  <insert id="insertInfoBatch">
+     insert into a435_1( placename, commodity, voicestation,befor_fee,fee,after_fee)
+     values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (
+      #{item.placename}, #{item.commodity}, #{item.voicestation}, #{item.beforFee}, #{item.fee},#{item.afterFee}
+      )
+    </foreach>
+  </insert>
+  <select id="find" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from a435_1
+    where placename=#{placename}
+    and  commodity=#{commodity}
+  </select>
+  <select id="findAll" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from a435_1 ORDER BY placename DESC
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from a435_1
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <update id="update">
+    update a435_1
+    set
+    placename = #{placename,jdbcType=VARCHAR}
+    where
+    id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from a435_1
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ssmdeem.entity.A435_1" >
+    insert into a435_1 (id, placename, commodity, 
+      voicestation, befor_fee, fee, 
+      after_fee, serial_number, time
+      )
+    values (#{id,jdbcType=INTEGER}, #{placename,jdbcType=VARCHAR}, #{commodity,jdbcType=VARCHAR}, 
+      #{voicestation,jdbcType=VARCHAR}, #{beforFee,jdbcType=DOUBLE}, #{fee,jdbcType=DOUBLE}, 
+      #{afterFee,jdbcType=DOUBLE}, #{serialNumber,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.ssmdeem.entity.A435_1" >
+    insert into a435_1
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="placename != null" >
+        placename,
+      </if>
+      <if test="commodity != null" >
+        commodity,
+      </if>
+      <if test="voicestation != null" >
+        voicestation,
+      </if>
+      <if test="beforFee != null" >
+        befor_fee,
+      </if>
+      <if test="fee != null" >
+        fee,
+      </if>
+      <if test="afterFee != null" >
+        after_fee,
+      </if>
+      <if test="serialNumber != null" >
+        serial_number,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="placename != null" >
+        #{placename,jdbcType=VARCHAR},
+      </if>
+      <if test="commodity != null" >
+        #{commodity,jdbcType=VARCHAR},
+      </if>
+      <if test="voicestation != null" >
+        #{voicestation,jdbcType=VARCHAR},
+      </if>
+      <if test="beforFee != null" >
+        #{beforFee,jdbcType=DOUBLE},
+      </if>
+      <if test="fee != null" >
+        #{fee,jdbcType=DOUBLE},
+      </if>
+      <if test="afterFee != null" >
+        #{afterFee,jdbcType=DOUBLE},
+      </if>
+      <if test="serialNumber != null" >
+        #{serialNumber,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ssmdeem.entity.A435_1" >
+    update a435_1
+    <set >
+      <if test="placename != null" >
+        placename = #{placename,jdbcType=VARCHAR},
+      </if>
+      <if test="commodity != null" >
+        commodity = #{commodity,jdbcType=VARCHAR},
+      </if>
+      <if test="voicestation != null" >
+        voicestation = #{voicestation,jdbcType=VARCHAR},
+      </if>
+      <if test="beforFee != null" >
+        befor_fee = #{beforFee,jdbcType=DOUBLE},
+      </if>
+      <if test="fee != null" >
+        fee = #{fee,jdbcType=DOUBLE},
+      </if>
+      <if test="afterFee != null" >
+        after_fee = #{afterFee,jdbcType=DOUBLE},
+      </if>
+      <if test="serialNumber != null" >
+        serial_number = #{serialNumber,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ssmdeem.entity.A435_1" >
+    update a435_1
+    set placename = #{placename,jdbcType=VARCHAR},
+      commodity = #{commodity,jdbcType=VARCHAR},
+      voicestation = #{voicestation,jdbcType=VARCHAR},
+      befor_fee = #{beforFee,jdbcType=DOUBLE},
+      fee = #{fee,jdbcType=DOUBLE},
+      after_fee = #{afterFee,jdbcType=DOUBLE},
+      serial_number = #{serialNumber,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
